@@ -1,0 +1,25 @@
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<a href="{% url 'learning_logs:topic' Topic.id %}"><span style="font-size: 20px;">
+  Topic: {{ Topic.text }}</span></a>
+{% endblock page_header %}
+
+
+{% block content %}
+ <div class="card mb-4">
+        <!-- Card header with timestamp and edit link -->
+        <h5 class="card-header">Edit entry</h5>
+        <!-- Card body with entry text -->
+        <form action="{% url 'learning_logs:edit_entry' Entry.id %}" method="post">
+            {% csrf_token %}
+            <div class="card-body">
+                {{Form.text}}
+                {{Form.text.errors}}
+            </div>
+            <!--{{Entry.as_div}}-->
+            {% bootstrap_button button_type="submit" content="Save &raquo;" %}
+        </form>
+  </div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+  <div class="p-3 mb-4 bg-light border rounded-3">
+      <div class="container-fluid py-4">
+          <h1 class="display-5">Track your learning.</h1><br/>
+          <p class="lead">Make your own Learning Log, and keep a list of the topics you're learning about. Whenever you
+              learn something new about a topic, make an entry summarizing what you've learned.</p>
+          <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Register &raquo;</a>
+      </div>
+  </div>
+{% endblock page_header %}
+
+{% block content %}
+<h4><span class="text">Ten most recently </span><a href="{% url 'learning_logs:topics' %}">Topics</a></h4>
+    <ul class="list-group border-bottom pb-2 mb-4">
+        {% for topic in Topics %}
+            <li class="list-group-item border-0"><a href="{% url 'learning_logs:topic' topic.id %}">
+                {{topic.text}}</a></li>
+        {% empty %}
+            <li class="list-group-item border-0">No topics have been added yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
